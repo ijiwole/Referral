@@ -12,7 +12,7 @@ const withdrawBalance = async(req, res) => {
         });
     }
 
-    if(!isNaN(amount)){
+    if(isNaN(amount)){
         res.status(StatusCodes.BAD_REQUEST).json({
             message: 'amount provided is not a number'
         });
