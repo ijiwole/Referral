@@ -7,25 +7,25 @@ const withdrawBalance = async(req, res) => {
     const {amount, account_no, bank_code } = req.body;
 
     if(!amount){
-        res.status(StatusCodes.BAD_REQUEST).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
             message: 'amount not provided'
         });
     }
 
     if(isNaN(amount)){
-        res.status(StatusCodes.BAD_REQUEST).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
             message: 'amount provided is not a number'
         });
     }
 
     if(!account_no){
-        res.status(StatusCodes.BAD_REQUEST).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
             message: 'account_no not provided'
         });
     }
 
     if(!bank_code){
-        res.status(StatusCodes.BAD_REQUEST).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
             message: 'bank_code not provided'
         });
     }
@@ -39,7 +39,7 @@ const withdrawBalance = async(req, res) => {
         const validateAccountDetails = getAccount({ account_no, bank_code });
 
         if(!validateAccountDetails){
-            res.status(StatusCodes.NOT_FOUND).json({
+           return res.status(StatusCodes.NOT_FOUND).json({
                 message: 'account details provided not valid'
             });
         }
@@ -47,7 +47,7 @@ const withdrawBalance = async(req, res) => {
         const transfer = await transferFund({amount, account_no, bank_code});
 
         if(transfer.status !== 200){
-            res.status(StatusCodes.BAD_REQUEST).json({
+           return res.status(StatusCodes.BAD_REQUEST).json({
                 message: `transfer failed ${transfer.message}`,
             })
         }
