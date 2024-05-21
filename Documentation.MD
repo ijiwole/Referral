@@ -87,7 +87,7 @@ If the API requires authentication, obtain token as per the authentication mecha
 #### Wallet Route
 ##### Please note that all request to be made to the wallet route requires a `Bearer Token` which can be gotten only when a user has already registered and is logged in.
 
-## Withdraw
+## Withdraw from Wallet
 
 - **Route:** `/api/wallet/withdraw`
 - **Request Type:** POST
@@ -102,6 +102,20 @@ If the API requires authentication, obtain token as per the authentication mecha
 **Response:**
 
 - `data (string): message from server`
+- `message (string): success message.`
+
+## Fund Wallet
+
+- **Route:** `/api/wallet/fund`
+- **Request Type:** POST
+- **Description:** This endpoint allows users to fund their wallets
+
+**Request Body:**
+
+- `"amount": "number",`
+
+**Response:**
+
 - `message (string): success message.`
 
 `Error Handling`
