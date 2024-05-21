@@ -56,7 +56,7 @@ const withdrawBalance = async(req, res) => {
         await user.save();
 
         res.status(StatusCodes.OK).json({
-            message: `transfer processed successfully ${transfer.message}`,
+            message: `transfer processed successfully`,
             data: transfer.message
         });
     }catch(err){
