@@ -4,9 +4,9 @@ const {
     generateReferralCode,
     shareMyReferralCode
 } = require('../controller/referrals');
-const protectUser = require('../util/protect');
+const {protect_user} = require('../middleware/protect_user');
 
-referralRoute.route('/generate').post(protectUser, generateReferralCode);
-referralRoute.route('/get').get(protectUser, shareMyReferralCode);
+referralRoute.route('/generate').post(protect_user, generateReferralCode);
+referralRoute.route('/get').get(protect_user, shareMyReferralCode);
 
 module.exports = referralRoute;

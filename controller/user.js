@@ -1,7 +1,6 @@
 const UserModel = require('../models/user');
 const {StatusCodes} = require('http-status-codes');
 const generateToken = require('../util/token');
-
 const register = async(req, res) => {
 
     const { username, email, firstName, lastName, password, referralCode } = req.body;
