@@ -67,7 +67,16 @@ const handleReferral = async (referralCode) => {
     }
 };
 
+const getProfile = (req, res) => {
+    const user = req.headers;
+    res.status(StatusCodes.OK).json({
+        data: user,
+        message: 'profile fetched'
+    })
+}
+
 module.exports = {
     register,
-    login
+    login,
+    getProfile
 }
