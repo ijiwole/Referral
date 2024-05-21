@@ -23,7 +23,7 @@ const register = async(req, res) => {
             message: 'registration successfully'
         })
     }catch(error){
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             message: `Internal Sever Error: ${error.message}`
         })
     }
@@ -43,17 +43,17 @@ const login = async(req, res) => {
         const user = await UserModel.findOne({email: email});
 
         if (!user || !(await user.comparePassword(password))) {
-            res.status(StatusCodes.NOT_FOUND).json({
+           return res.status(StatusCodes.NOT_FOUND).json({
                 message: 'Invalid login credentials'
             })
         }
 
-    res.status(StatusCodes.OK).json({
+   return res.status(StatusCodes.OK).json({
         message: 'login successful',
         token: generateToken(user.id)
     })
     }catch(e){
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             message: `Internal Sever Error: ${e.message}`
         })
     }
@@ -69,7 +69,7 @@ const handleReferral = async (referralCode) => {
 
 const getProfile = (req, res) => {
     const user = req.headers;
-    res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.OK).json({
         data: user,
         message: 'profile fetched'
     })
