@@ -55,10 +55,12 @@ const withdrawBalance = async(req, res) => {
         user.balance -= amount;
         await user.save();
 
-        res.status(StatusCodes.OK).json({
+        return res.status(StatusCodes.OK).json({
             message: `transfer processed successfully`,
             data: transfer.message
         });
+
+    
     }catch(err){
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             message: `internal server error ${err.message}`,
@@ -66,6 +68,37 @@ const withdrawBalance = async(req, res) => {
     }
 }
 
+const fundWallet = async(req, res) => {
+    try{
+        const user = req.headers;
+        const {amount} =req.body;
+
+        if(!amount){
+            res.status(StatusCodes.BAD_REQUEST).json({
+                message: 'amount not provided'
+            });
+        }
+
+        if(isNaN(amount)){
+            res.status(StatusCodes.BAD_REQUEST).json({
+                message: 'amount provided is not a number'
+            });
+        }
+
+        user.balance += amount;
+        await user.save();
+
+        return res.status(StatusCodes.OK).json({
+            message: "wallet funded successfully"
+        });
+    }catch (e) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            message: 'Internal Server error'
+        });
+    }
+}
+
 module.exports = {
-    withdrawBalance
+    withdrawBalance,
+    fundWallet
 }
