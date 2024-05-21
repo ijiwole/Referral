@@ -31,6 +31,11 @@ const withdrawBalance = async(req, res) => {
     }
 
     try{
+        if(amount > user.balance){
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                message: "account balance is lower than the amount to be withdrawn"
+            })
+        }
         const validateAccountDetails = getAccount({ account_no, bank_code });
 
         if(!validateAccountDetails){
